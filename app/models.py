@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.sql.expression import text
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy.orm import relationship
@@ -13,7 +13,6 @@ class User(Base):
     password = Column(String, nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     
-    doctor = relationship('Doctor', back_populates='patients', cascade='all, delete')
     
 class Doctor(Base):
     __tablename__ = "Doctor"
@@ -24,5 +23,5 @@ class Doctor(Base):
     password = Column(String, nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     
-    patients = relationship('User', back_populates='doctor')
+
     

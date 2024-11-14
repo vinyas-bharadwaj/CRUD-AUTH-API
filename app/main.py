@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from .routers import auth, users
+from .routers import auth, users, doctors, predict
 from . import models
 from .database import engine, get_db
 
@@ -21,6 +21,8 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(users.router)
+app.include_router(doctors.router)
+app.include_router(predict.router)
 
 @app.get("/")
 def home():
